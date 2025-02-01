@@ -63,15 +63,17 @@ export default function DriveContents(props: {
             ))}
           </ul>
         </div>
-        <UploadButton
-          endpoint="driveUploader"
-          onClientUploadComplete={() => {
-            navigate.refresh();
-          }}
-          input={{
-            folderId: props.currentFolderId,
-          }}
-        />
+        <div className="flex justify-end pt-4">
+          <UploadButton
+            endpoint="driveUploader"
+            onClientUploadComplete={() => {
+              navigate.refresh();
+            }}
+            input={{
+              folderId: props.currentFolderId,
+            }}
+          />
+        </div>
       </div>
     </div>
   );
