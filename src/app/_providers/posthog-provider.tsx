@@ -15,12 +15,14 @@ const SuspendedPostHogPageView = dynamicLoader(
 
 export function PostHogProvider({ children }: { children: React.ReactNode }) {
   useEffect(() => {
-    posthog.init(env.NEXT_PUBLIC_POSTHOG_KEY, {
-      api_host: "/ingest",
-      ui_host: "https://us.posthog.com",
-      capture_pageview: false, // Disable automatic pageview capture, as we capture manually
-      capture_pageleave: true,
-    });
+    if (process.env.NODE_ENV === 'production') {
+      posthog.init(env.NEXT_PUBLIC_POSTHOG_KEY, {
+        api_host: "/ingest",
+        ui_host: "https://us.posthog.com",
+        capture_pageview: false, // Disable automatic pageview capture, as we capture manually
+        capture_pageleave: true,
+      });
+    }
   }, []);
 
   return (
